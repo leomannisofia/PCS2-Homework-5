@@ -1,0 +1,11 @@
+from Bio import SeqIO
+o,id,sq = 3, [], []
+f=open(r"C:\Users\onthe\Downloads\rosalind_grph.txt")
+for s in SeqIO.parse(f,"fasta"):
+    id.append(str(s.name))
+    sq.append(str(s.seq))
+for x in range(len(sq)):
+    for y in range(len(sq)):
+        if x != y:
+            if sq[x][-o:] == sq[y][:o]:
+                print(id[x], id[y])
