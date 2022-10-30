@@ -1,0 +1,24 @@
+s=open(r"C:\Users\onthe\Downloads\rosalind_long.txt").read()
+s=s.replace("Rosalind_", "").replace("\n", "")
+s=''.join([i for i in s if not i.isdigit()])
+ss=s.split(">")
+ss.remove("")
+def mmaxovrlp(reads):
+    maxlng=-1
+    for x in range(len(reads)):
+        for y in [num for num in range(len(reads)) if num!=x]:
+            prefix,suffix=reads[x],reads[y]
+            i=0
+            while prefix[i:]!=suffix[0:len(prefix[i:])]:
+                i+=1
+            if len(prefix)-i > maxlng:
+                maxlng=len(prefix)-i
+                maxind=[x, y]
+    return [reads[j] for j in range(len(reads)) if j not in maxind] + [reads[maxind[0]] + reads[maxind[1]][maxlng:]]
+def comsups(reads):
+    while len(reads)>1:
+        reads=mmaxovrlp(reads)
+    return reads[0]
+if __name__ == '__main__':
+    sups=comsups(ss)
+    print(sups)
