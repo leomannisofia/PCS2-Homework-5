@@ -1,0 +1,15 @@
+ss = open(r"C:\Users\onthe\Downloads\rosalind_tran.txt").read().split(">")[1:]
+for i in range(len(ss)):
+    ss[i] = ss[i].replace("\n", '')
+    while ss[i][0] not in "ACGT":
+        ss[i] = ss[i][1:]
+transi = {('A', 'G'),('T', 'C'),('C', 'T'),('G', 'A')}
+transv = {('A', 'T'),('A', 'C'),('T', 'A'),('T', 'G'),('C', 'A'),('C', 'G'),('G', 'T'),('G', 'C')}
+s, t = ss
+transi2, transv2 = 0, 0
+for x in range(len(s)):
+    if (s[x], t[x]) in transi:
+        transi2 += 1
+    if (s[x], t[x]) in transv:
+        transv2 += 1
+print(transi2/transv2)
