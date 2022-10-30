@@ -1,0 +1,55 @@
+with open(r"C:\Users\onthe\Downloads\rosalind_orf.txt") as s:
+    s.readline()
+    dna=list()
+    for x in s:
+        dna+=x.strip()
+rnarev=[]
+for x in range(len(dna)):
+    i=len(dna)-1-x
+    if dna[i]=="T":
+        dna[i]="U"
+        rnarev.append("A")
+    else:
+        if dna[i] == "A":
+            rnarev.append("U")
+        else:
+            if dna[i]=="C":
+                rnarev.append("G")
+            else:
+                rnarev.append("C")
+rna=''.join(dna)
+rnarev=''.join(rnarev)
+table={"AUG":"M","GCC":"A","GCG":"A","CCC":"P","AGA":"R","ACU":"T","GAG":"E","AUC":"I",
+    "AAU":"N","AGU":"S","ACC":"T","CGU":"R","AUU":"I","AAC":"N","GGG":"G","UGA":"stop","AUA":"I","ACA":"T", "ACG":"T","AAA":"K", "AAG":"K","AGC":"S", "AGG":"R",
+    "GUU":"V","GUC":"V","GUA":"V","GUG":"V","GCU":"A","GCA":"A","GAU":"D","GAC":"D","GAA":"E","GGU":"G","GGC":"G","GGA":"G",
+    "CAU":"H","CAC":"H","CAA":"Q","CAG":"Q","CGC":"R","CGA":"R","CGG":"R","CUU":"L","CUC":"L","CUA":"L","CUG":"L","CCU":"P","CCA":"P","CCG":"P",
+    "UUU":"F","UUC":"F","UUA":"L","UUG":"L","UCU":"S","UCC":"S","UCA":"S","UCG":"S","UAU":"Y","UAC":"Y","UAA":"stop","UAG": "stop","UGU":"C","UGC":"C","UGA":"stop","UGG":"W"}
+lst=[]
+for x in range(len(rna)-2):
+    if rna[x:x+3]=='AUG':
+        y=x
+        prot=''
+        cod='AUG'
+        while table[cod]!="stop":
+            prot+=table[cod]
+            y+=3
+            if y>len(rna)-3:
+                break
+            cod=rna[y:y+3]
+        if table[cod]=="stop" and prot not in lst:
+            lst.append(prot)
+for x in range(len(rnarev)-2):
+    if rnarev[x:x+3]=='AUG':
+        y=x
+        prot=''
+        cod='AUG'
+        while table[cod]!="stop":
+            prot+=table[cod]
+            y+=3
+            if y>len(rnarev)-3:
+                break
+            cod=rnarev[y:y+3]
+        if table[cod]=="stop" and prot not in lst:
+            lst.append(prot)
+for x in lst:
+    print(x)
