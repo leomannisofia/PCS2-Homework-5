@@ -1,0 +1,5 @@
+from math import factorial
+s=open(r"C:\Users\onthe\Downloads\rosalind_pmch.txt").read()
+au=factorial(s.count('A'))
+gc=factorial(s.count('G'))
+print(au*gc)
