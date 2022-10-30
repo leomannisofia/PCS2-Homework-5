@@ -1,0 +1,7 @@
+f=open(r"C:\Users\onthe\Downloads\rosalind_tree.txt").read().split()
+n,l=int(f[0]),f[1:]
+edges=[]
+for x in l:
+    edges.append(int(x))
+mined=int(n-1-(len(l)/2))
+print(mined)
