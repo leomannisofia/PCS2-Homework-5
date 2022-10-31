@@ -1,0 +1,13 @@
+from itertools import product
+p=open(r"C:\Users\onthe\Downloads\rosalind_lexv.txt")
+s,n=[l.strip() for l in p.readlines()]
+s,n=[" "]+s.split(),int(n)
+strings=[]
+for x in product(s,repeat=n):
+    if " " not in x:
+        strings.append("".join(x))
+    else:
+        for i in range(1,n):
+            if "".join(x[i:n]) == " "*(n-i) and " " not in x[:i]:
+                strings.append("".join(x).replace(" ",""))
+print("\n".join(strings))
