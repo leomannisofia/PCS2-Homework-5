@@ -1,0 +1,12 @@
+from itertools import permutations,product
+n,perm,tot=5,[],0 
+p=itertools.permutations(list(range(1,n+1)))
+for x in p:
+    pp=itertools.product([-1, 1],repeat=len(list(range(1,n+1))))
+    for y in pp:
+        sp=[x*sign for x, sign in zip(x,y)]                         
+        perm.append(sp)                                           
+        tot=tot+1                                                            
+print(tot)                                                                  
+for x in range(0,len(perm)): 
+    print(*perm[x],sep=' ')
